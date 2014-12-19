@@ -6,6 +6,21 @@
 #define MAXSZ_QST 200
 
 int nLinFl = 0;
+short *usedQst;
+
+void zero_short(short *array, int size){
+	int i;
+	for(i = 0; i<size; i++)
+		array[i] = 0;
+}
+
+int emptyQst(){
+	int i;
+	for (i = 0; i < nLinFl; i++){
+		if(usedQst[i]==0) return 0;
+	}
+	return 1;
+}
 
 void countLines(FILE* f){
 	char* aux = malloc(sizeof(char)*MAXSZ_QST);
@@ -17,10 +32,15 @@ void countLines(FILE* f){
 }
 
 char* genQst(FILE* fl){
+	if (emptyQst()) return NULL;
 	rewind(fl);
 	char *ans = malloc(sizeof(char)*MAXSZ_QST);
 	srand((unsigned)time(NULL));
-	int i, nQst = rand()%(nLinFl/*-1*/);
+	int i, nQst;
+	do{
+		nQst = rand()%(nLinFl);
+	} while (usedQst[nQst]);
+	usedQst[nQst] = 1;
 	for (i = 0; i < nQst; i++){
 		fgets(ans, MAXSZ_QST, fl);
 	}
@@ -32,6 +52,8 @@ int main(int argc, char **argv){
 	FILE* file = fopen(argv[1], "r");
 	if(!(long)file) return 1;
 	countLines(file);
+	usedQst = malloc(sizeof(short)*nLinFl);
+	zero_short(usedQst, nLinFl);
 	printf("%s%s\n\n", argv[1], " aberto!\nPara ajuda digite: help");
 
 	int cnt = 1;
@@ -44,13 +66,19 @@ int main(int argc, char **argv){
 			break;
 		}else{
 			if(!strcmp(cmd, "help")){
-				printf("Ajuda: help\nGerar pergunta: ans\nSair: exit\n\n");
+				printf("Ajuda: help\nGerar pergunta: qst\nSair: exit\n\n");
 			}else{
-				if (!strcmp(cmd, "ans")){
+				if (!strcmp(cmd, "qst")){
 					char *qst = genQst(file);
-					printf("PERGUNTA (%d): %s\n\n", cnt, qst);
-					free(qst);
-					cnt++;
+					if(!(long)qst){
+						printf("FIM DE JOGO!!!\n");
+						break;
+					}
+					else{
+						printf("PERGUNTA (%d): %s\n\n", cnt, qst);
+						cnt++;
+						free(qst);
+					}
 				}else{
 					continue;
 				}
