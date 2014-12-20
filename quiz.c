@@ -54,11 +54,12 @@ int main(int argc, char **argv){
 	countLines(file);
 	usedQst = malloc(sizeof(short)*nLinFl);
 	zero_short(usedQst, nLinFl);
-	printf("%s%s\n\n", argv[1], " aberto!\nPara ajuda digite: help");
+	printf("%s aberto!\n%d perguntas carregadas\nPara ajuda digite: help\n\n", argv[1], nLinFl);
 
 	int cnt = 1;
 	char *cmd = malloc(sizeof(char)*4);
 	while(1){
+		printf(">>");
 		scanf("%s", cmd);
 		printf("\n");
 
@@ -75,7 +76,7 @@ int main(int argc, char **argv){
 						break;
 					}
 					else{
-						printf("PERGUNTA (%d): %s\n\n", cnt, qst);
+						printf("PERGUNTA (%d): %s\n", cnt, qst);
 						cnt++;
 						free(qst);
 					}
