@@ -4,7 +4,7 @@ Author: Hugo Farias
 
 --------------------
 
-The program quiz is a lib and a main in text mode to make quizes. With it you can charge a special file with questions and four answers (one right and three wrong) and use it in a quiz.
+The program quiz is a lib and a main in text mode to make quizes. With it you can charge a special file with questions and four answers (one right and three wrong) for question and use it in a quiz.
 You can print the question with or without the answers in a random order.
 
 --------------------
