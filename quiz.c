@@ -26,13 +26,13 @@ void inline zero_short(short *array, int size){ //the compiler copy this code an
 
 int emptyQst(){
 	int i;
-	for (i = 0; i < getNLinFl(); i++){
+	for (i = 0; i < getNQst(); i++){
 		if(usedQst[i]==0) return 0;
 	}
 	return 1;
 }
 
-void countLines(FILE* f){
+void inline countLines(FILE* f){
 	char* aux = malloc(sizeof(char)*MAXSZ_QST);
 	while(!feof(f)){
 		fgets(aux, MAXSZ_QST, f);
@@ -55,6 +55,7 @@ Tqst* genQst(FILE* fl){
 		nQst = rand()%(getNQst());
 	} while (usedQst[nQst]);
 	usedQst[nQst] = 1;
+	printf("nQst: %d\n", nQst);
 	for (i = 0; i <= nQst; i++){
 		fgets(qst->qst, MAXSZ_QST, fl);
 		fgets(qst->rightAns, MAXSZ_QST, fl);
@@ -73,7 +74,7 @@ FILE* chargeFile(char* nameFile){
 	FILE* file = fopen(nameFile, "r");
 	if(!(long)file) return NULL;
 	countLines(file);
-	usedQst = malloc(sizeof(short)*getNLinFl());
-	zero_short(usedQst, getNLinFl());
+	usedQst = malloc(sizeof(short)*getNQst());
+	zero_short(usedQst, getNQst());
 	return file;
 }
