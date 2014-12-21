@@ -1,12 +1,15 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
-
-#define MAXSZ_QST 200
+#include "quiz.h"
 
 int nLinFl = 0;
 short *usedQst;
+
+int getNLinFl(){
+	return nLinFl;
+}
+
+void increaseNLinFl(){
+	nLinFl++;
+}
 
 void zero_short(short *array, int size){
 	int i;
@@ -16,7 +19,7 @@ void zero_short(short *array, int size){
 
 int emptyQst(){
 	int i;
-	for (i = 0; i < nLinFl; i++){
+	for (i = 0; i < getNLinFl(); i++){
 		if(usedQst[i]==0) return 0;
 	}
 	return 1;
@@ -26,7 +29,7 @@ void countLines(FILE* f){
 	char* aux = malloc(sizeof(char)*MAXSZ_QST);
 	while(!feof(f)){
 		fgets(aux, MAXSZ_QST, f);
-		nLinFl++;
+		increaseNLinFl();
 	}
 	free(aux);
 }
@@ -38,7 +41,7 @@ char* genQst(FILE* fl){
 	srand((unsigned)time(NULL));
 	int i, nQst;
 	do{
-		nQst = rand()%(nLinFl);
+		nQst = rand()%(getNLinFl());
 	} while (usedQst[nQst]);
 	usedQst[nQst] = 1;
 	for (i = 0; i < nQst; i++){
@@ -48,13 +51,23 @@ char* genQst(FILE* fl){
 	return ans;
 }
 
-int main(int argc, char **argv){
-	FILE* file = fopen(argv[1], "r");
-	if(!(long)file) return 1;
+FILE* chargeFile(char* nameFile){
+	/*
+	**returns the pointer to file
+	**and initializes the global variables
+	*/
+	FILE* file = fopen(nameFile, "r");
+	if(!(long)file) return NULL;
 	countLines(file);
-	usedQst = malloc(sizeof(short)*nLinFl);
-	zero_short(usedQst, nLinFl);
-	printf("%s aberto!\n%d perguntas carregadas\nPara ajuda digite: help\n\n", argv[1], nLinFl);
+	usedQst = malloc(sizeof(short)*getNLinFl());
+	zero_short(usedQst, getNLinFl());
+	return file;
+}
+
+/*int main(int argc, char **argv){
+	file = chargeFile(argv[1]);
+	if(!(long)file) return 1; //if null file return error
+	printf("%s aberto!\n%d perguntas carregadas\nPara ajuda digite: help\n\n", argv[1], getNLinFl);
 
 	int cnt = 1;
 	char *cmd = malloc(sizeof(char)*4);
@@ -91,3 +104,4 @@ int main(int argc, char **argv){
 	fclose(file);
 	return 0;
 }
+*/
