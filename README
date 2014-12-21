@@ -1,0 +1,38 @@
+QUIZ
+1.1
+Author: Hugo Farias
+
+--------------------
+
+The program quiz is a lib and a main in text mode to make quizes. With it you can charge a special file with questions and four answers (one right and three wrong) and use it in a quiz.
+You can print the question with or without the answers in a random order.
+
+--------------------
+
+File qz (version 1.1):
+
+The qz file is a text file used by the program. It's structure is
+
+question
+right answer
+wrong answer
+wrong answer
+wrong answer
+
+For example, an example.qz with three questions would be the following structure:
+
+question
+right answer
+wrong answer
+wrong answer
+wrong answer
+question
+right answer
+wrong answer
+wrong answer
+wrong answer
+question
+right answer
+wrong answer
+wrong answer
+wrong answer
