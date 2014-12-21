@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 #include "quiz.h"
 
 int nLinFl = 0;
@@ -35,6 +38,10 @@ void countLines(FILE* f){
 }
 
 char* genQst(FILE* fl){
+	/*
+	**returns one random questions
+	**from the file .qz charged
+	*/
 	if (emptyQst()) return NULL;
 	rewind(fl);
 	char *ans = malloc(sizeof(char)*MAXSZ_QST);
@@ -63,45 +70,3 @@ FILE* chargeFile(char* nameFile){
 	zero_short(usedQst, getNLinFl());
 	return file;
 }
-
-/*int main(int argc, char **argv){
-	file = chargeFile(argv[1]);
-	if(!(long)file) return 1; //if null file return error
-	printf("%s aberto!\n%d perguntas carregadas\nPara ajuda digite: help\n\n", argv[1], getNLinFl);
-
-	int cnt = 1;
-	char *cmd = malloc(sizeof(char)*4);
-	while(1){
-		printf(">>");
-		scanf("%s", cmd);
-		printf("\n");
-
-		if (!strcmp(cmd, "exit")){
-			break;
-		}else{
-			if(!strcmp(cmd, "help")){
-				printf("Ajuda: help\nGerar pergunta: qst\nSair: exit\n\n");
-			}else{
-				if (!strcmp(cmd, "qst")){
-					char *qst = genQst(file);
-					if(!(long)qst){
-						printf("FIM DE JOGO!!!\n");
-						break;
-					}
-					else{
-						printf("PERGUNTA (%d): %s\n", cnt, qst);
-						cnt++;
-						free(qst);
-					}
-				}else{
-					continue;
-				}
-			}
-		}
-	}
-
-	free(cmd);
-	fclose(file);
-	return 0;
-}
-*/
