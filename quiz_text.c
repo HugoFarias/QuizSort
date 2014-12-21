@@ -6,7 +6,7 @@
 int main(int argc, char **argv){
 	FILE *file = chargeFile(argv[1]);
 	if(!(long)file) return 1; //if null file return error
-	printf("%s aberto!\n%d perguntas carregadas\nPara ajuda digite: help\n\n", argv[1], getNLinFl());
+	printf("%s aberto!\n%d perguntas carregadas\nPara ajuda digite: help\n\n", argv[1], getNQst());
 
 	int cnt = 1;
 	char *cmd = malloc(sizeof(char)*4);
@@ -22,13 +22,13 @@ int main(int argc, char **argv){
 				printf("Ajuda: help\nGerar pergunta: qst\nSair: exit\n\n");
 			}else{
 				if (!strcmp(cmd, "qst")){
-					char *qst = genQst(file);
+					Tqst *qst = genQst(file);
 					if(!(long)qst){
 						printf("FIM DE JOGO!!!\n");
 						break;
 					}
 					else{
-						printf("PERGUNTA (%d): %s\n", cnt, qst);
+						printf("PERGUNTA (%d): %s\n", cnt, qst->qst);
 						cnt++;
 						free(qst);
 					}

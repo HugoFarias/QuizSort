@@ -10,11 +10,15 @@ int getNLinFl(){
 	return nLinFl;
 }
 
+int getNQst(){
+	return nLinFl/5;
+}
+
 void increaseNLinFl(){
 	nLinFl++;
 }
 
-void zero_short(short *array, int size){
+void inline zero_short(short *array, int size){ //the compiler copy this code and put in the function call
 	int i;
 	for(i = 0; i<size; i++)
 		array[i] = 0;
@@ -37,25 +41,28 @@ void countLines(FILE* f){
 	free(aux);
 }
 
-char* genQst(FILE* fl){
+Tqst* genQst(FILE* fl){
 	/*
 	**returns one random questions
 	**from the file .qz charged
 	*/
 	if (emptyQst()) return NULL;
 	rewind(fl);
-	char *ans = malloc(sizeof(char)*MAXSZ_QST);
+	Tqst *qst = malloc(sizeof(Tqst));
 	srand((unsigned)time(NULL));
 	int i, nQst;
 	do{
-		nQst = rand()%(getNLinFl());
+		nQst = rand()%(getNQst());
 	} while (usedQst[nQst]);
 	usedQst[nQst] = 1;
-	for (i = 0; i < nQst; i++){
-		fgets(ans, MAXSZ_QST, fl);
+	for (i = 0; i <= nQst; i++){
+		fgets(qst->qst, MAXSZ_QST, fl);
+		fgets(qst->rightAns, MAXSZ_QST, fl);
+		fgets(qst->wrongAns[0], MAXSZ_QST, fl);
+		fgets(qst->wrongAns[1], MAXSZ_QST, fl);
+		fgets(qst->wrongAns[2], MAXSZ_QST, fl);
 	}
-	fgets(ans, MAXSZ_QST, fl);
-	return ans;
+	return qst;
 }
 
 FILE* chargeFile(char* nameFile){
