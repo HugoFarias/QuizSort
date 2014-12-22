@@ -1,14 +1,18 @@
 #define MAXSZ_QST 200
 
 typedef struct question{
-	char qst[MAXSZ_QST], rightAns[MAXSZ_QST], wrongAns[MAXSZ_QST][3];
+	char qst[MAXSZ_QST], ans[4][MAXSZ_QST];
+	short rightAns;
 } Tqst;
 
 int getNLinFl();
 int getNQst();
 void increaseNLinFl();
-void zero_short(short *array, int size);
+void inline zero_short(short *array, int size);
 int emptyQst();
-void countLines(FILE* f);
-Tqst* genQst(FILE* fl);
+void inline countLines(FILE* f);
+char* genQst(FILE* fl);
+char* getAns();
+char* rightAns();
 FILE* chargeFile(char* nameFile);
+void finish();
