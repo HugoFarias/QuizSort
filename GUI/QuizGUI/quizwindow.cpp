@@ -39,13 +39,17 @@ void QuizWindow::on_bFile_clicked()
 void QuizWindow::on_bQuestion_clicked()
 {
     if(charged){
-        char *qst = genQst();
-        char *ans = genAns();
         QString qQst;
-        qQst.sprintf("%s%s\n", qst, ans);
+        char *qst = genQst();
+        if(!(long)qst){
+            qQst = "FIM DE JOGO!!!";
+        }else{
+            char *ans = genAns();
+            qQst.sprintf("%s%s\n", qst, ans);
+            free(ans);
+            answered = false;
+        }
         ui->tAnswer->setPlainText(qQst);
-        free(ans);
-        answered = false;
     }
 }
 
