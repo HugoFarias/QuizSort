@@ -5,6 +5,7 @@
 
 int nLinFl = 0;
 short *usedQst;
+FILE* file;
 Tqst *currQst;
 
 int getNLinFl(){
@@ -33,10 +34,10 @@ int emptyQst(){
 	return 1;
 }
 
-void inline countLines(FILE* f){
+void inline countLines(){
 	char* aux = (char*) calloc(MAXSZ_QST,sizeof(char));
-	while(!feof(f)){
-		fgets(aux, MAXSZ_QST, f);
+	while(!feof(file)){
+		fgets(aux, MAXSZ_QST, file);
 		increaseNLinFl();
 	}
 	free(aux);
@@ -68,14 +69,14 @@ short* getOrder(int size){
 	return order;
 }
 
-char* genQst(FILE* fl){
+char* genQst(){
 	/*
 	**generate one random question
 	**from the file .qz charged
 	**returns the interrogative part
 	*/
 	if (emptyQst()) return NULL;
-	rewind(fl);
+	rewind(file);
 	srand((unsigned)time(NULL));
 	int i, nQst;
 	do{
@@ -85,22 +86,22 @@ char* genQst(FILE* fl){
 
 	short *order = getOrder(4);
 	for (i = 0; i <= nQst; i++){
-		fgets(currQst->qst, MAXSZ_QST, fl);
-		fgets(currQst->ans[order[0]], MAXSZ_QST, fl);
-		fgets(currQst->ans[order[1]], MAXSZ_QST, fl);
-		fgets(currQst->ans[order[2]], MAXSZ_QST, fl);
-		fgets(currQst->ans[order[3]], MAXSZ_QST, fl);
+		fgets(currQst->qst, MAXSZ_QST, file);
+		fgets(currQst->ans[order[0]], MAXSZ_QST, file);
+		fgets(currQst->ans[order[1]], MAXSZ_QST, file);
+		fgets(currQst->ans[order[2]], MAXSZ_QST, file);
+		fgets(currQst->ans[order[3]], MAXSZ_QST, file);
 	}
 	currQst->rightAns = order[0];
 	free(order);
 	return currQst->qst;
 }
 
-char* getAns(){
+char* genAns(){
 	/*
 	**returns the current anwers
 	*/
-	char *ans = calloc(MAXSZ_QST*4+11,sizeof(char)); //4 answer plus the other chars in ans
+	char *ans = (char*) calloc(MAXSZ_QST*4+11,sizeof(char)); //4 answer plus the other chars in ans
 	sprintf(ans, "a) %sb) %sc) %sd) %s", currQst->ans[0], currQst->ans[1], currQst->ans[2], currQst->ans[3]);
 	return ans;
 }
@@ -113,21 +114,22 @@ char nRightAns(){
 	return (char) (currQst->rightAns + 97); // (char)97 == a
 }
 
-FILE* chargeFile(char* nameFile){
+int chargeFile(char* nameFile){
 	/*
-	**returns the pointer to file
-	**and initializes the global variables
+	**initializes the global variables
+	**and return a code indicating successful (0) or error (1)
 	*/
-	FILE* file = fopen(nameFile, "r");
-	if(!(long)file) return NULL;
-	countLines(file);
+	file = fopen(nameFile, "r");
+	if(!(long)file) return 1;
+	countLines();
 	usedQst = (short*) calloc(getNQst(),sizeof(short));
 	zero_short(usedQst, getNQst());
 	currQst = (Tqst*) malloc(sizeof(Tqst));
-	return file;
+	return 0;
 }
 
 void finish(){
+	fclose(file);
 	free(usedQst);
 	free(currQst);
 }
