@@ -15,6 +15,13 @@ public:
     explicit QuizWindow(QWidget *parent = 0);
     ~QuizWindow();
 
+private slots:
+    void on_bFile_clicked();
+
+    void on_bQuestion_clicked();
+
+    void on_bRAns_clicked();
+
 private:
     Ui::QuizWindow *ui;
 };

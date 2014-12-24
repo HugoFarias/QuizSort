@@ -1,24 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>QuizWindow</class>
- <widget class="QMainWindow" name="QuizWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="QuizWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>656</width>
+    <height>348</height>
    </rect>
   </property>
-  <property name="windowTitle" >
-   <string>QuizWindow</string>
+  <property name="windowTitle">
+   <string>Quiz</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>interrogacao.png</normaloff>interrogacao.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QLineEdit" name="tFile">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>281</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bFile">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>10</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Abrir</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="tAnswer">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>641</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bQuestion">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>260</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Perguntar</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bRAns">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>260</y>
+      <width>85</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Resposta</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>

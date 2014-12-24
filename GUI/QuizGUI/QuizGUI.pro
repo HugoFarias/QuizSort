@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        quizwindow.cpp
+        quizwindow.cpp \
+    quiz.cpp
 
-HEADERS  += quizwindow.h
+HEADERS  += quizwindow.h \
+    quiz.h
 
 FORMS    += quizwindow.ui
