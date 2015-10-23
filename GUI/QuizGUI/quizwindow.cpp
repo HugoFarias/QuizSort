@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <QFileDialog>
 #include "quizwindow.h"
 #include "ui_quizwindow.h"
 #include "quiz.h"
@@ -22,8 +23,9 @@ QuizWindow::~QuizWindow()
 void QuizWindow::on_bFile_clicked()
 {
     if(charged) finish();
-    QString nameFile = ui->tFile->text();
-    ui->tFile->clear();
+    //QString nameFile = ui->tFile->text();
+    QString nameFile = QFileDialog::getOpenFileName(this, tr("Abrir arquivo de Quiz"), "", tr("Arquivos de Quiz (*.qz)"));
+    //ui->tFile->clear();
     char *name = nameFile.toLocal8Bit().data();
     if(!chargeFile(name)){
         QString out;
@@ -31,7 +33,7 @@ void QuizWindow::on_bFile_clicked()
         ui->tAnswer->setText(out);
         charged = true;
     }else{
-        ui->tAnswer->setText("Erro!");
+        ui->tAnswer->setText("");
         charged = false;
     }
 }

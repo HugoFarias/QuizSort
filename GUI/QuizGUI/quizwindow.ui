@@ -2,60 +2,79 @@
 <ui version="4.0">
  <class>QuizWindow</class>
  <widget class="QMainWindow" name="QuizWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>656</width>
-    <height>348</height>
+    <width>657</width>
+    <height>352</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Quiz</string>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>interrogacao.png</normaloff>interrogacao.png</iconset>
+  <property name="minimumSize">
+   <size>
+    <width>657</width>
+    <height>352</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>657</width>
+    <height>352</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>QuizSort</string>
+  </property>
+  <property name="windowOpacity">
+   <double>2.000000000000000</double>
+  </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLineEdit" name="tFile">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>281</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="bFile">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>10</y>
+      <x>540</x>
+      <y>20</y>
       <width>85</width>
       <height>26</height>
      </rect>
     </property>
     <property name="text">
-     <string>Abrir</string>
+     <string>Abrir Quiz</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="tAnswer">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>641</width>
-      <height>192</height>
+      <x>30</x>
+      <y>20</y>
+      <width>491</width>
+      <height>281</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="bQuestion">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>260</y>
+      <x>540</x>
+      <y>220</y>
       <width>85</width>
       <height>26</height>
      </rect>
@@ -67,7 +86,7 @@
    <widget class="QPushButton" name="bRAns">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>540</x>
       <y>260</y>
       <width>85</width>
       <height>26</height>
@@ -78,7 +97,6 @@
     </property>
    </widget>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
